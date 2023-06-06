@@ -1,54 +1,58 @@
 ﻿@model System.Data.DataTable
 @using System.Data
 
+
 @if (Model != null && Model.Rows.Count > 0)
 {
-    <table>
-        <thead>
-            @foreach (DataColumn column in Model.Columns)
+<table>
+    <thead>
+        @foreach (DataColumn column in Model.Columns)
             {
-            <th>@column.ColumnName</th>
+    <th>@column.ColumnName</th>
+  <!-- Display the column names in the table header -->
             }
         </thead>
         <tbody>
             @foreach (DataRow row in Model.Rows)
             {
-                <tr>
-                    @foreach (var item in row.ItemArray)
+            <tr>
+                @foreach (var item in row.ItemArray)
                     {
-                        <td>@item</td>
+                <td>@item</td>
+  <!-- Display the cell values in the table body -->
                     }
-                </tr>
+            </tr>
             }
         </tbody>
     </table>
 
     <button type="button" onclick="addLine()">Add Line</button>
-    <button type="button" onclick="removeLine()">Remove Line</button>
+  <!-- Button to add a new row to the table -->
+    <button type="button" onclick="removeLine()">Remove Line</button>  <!-- Button to remove the last row from the table -->
 }
 
 @section Scripts {
     <script>
         function addLine() {
-            var newRow = document.createElement("tr");
-            var table = document.querySelector("table tbody");
+            var newRow = document.createElement("tr"); // Create a new row element
+            var table = document.querySelector("table tbody"); // Get the table body element
 
             // Modify the below code to add the desired number of columns
             for (var i = 0; i < 20; i++) {
-                var newCell = document.createElement("td");
-                newCell.textContent = "New Value";
-                newRow.appendChild(newCell);
+                var newCell = document.createElement("td"); // Create a new cell element
+                newCell.textContent = "New Value"; // Set the cell content
+                newRow.appendChild(newCell); // Append the cell to the new row
             }
 
-            table.appendChild(newRow);
+            table.appendChild(newRow); // Append the new row to the table body
         }
 
         function removeLine() {
-            var table = document.querySelector("table tbody");
-            var rows = table.querySelectorAll("tr");
+            var table = document.querySelector("table tbody"); // Get the table body element
+            var rows = table.querySelectorAll("tr"); // Get all the rows in the table
 
             if (rows.length > 0) {
-                table.removeChild(rows[rows.length - 1]);
+                table.removeChild(rows[rows.length - 1]); // Remove the last row from the table
             }
         }
     </script>
@@ -59,29 +63,31 @@
         <tr>
             @foreach (DataColumn column in Model.Columns)
             {
-                <th>@column.ColumnName</th>
+            <th>@column.ColumnName</th>
+  <!-- Display the column names in the table header -->
             }
         </tr>
     </thead>
     <tbody>
         @foreach (DataRow row in Model.Rows)
         {
-            <tr>
-                @foreach (var item in row.ItemArray)
+        <tr>
+            @foreach (var item in row.ItemArray)
                 {
-                    <td>@item.ToString()</td>
+            <td>@item.ToString()</td>
+  <!-- Display the cell values in the table body -->
                 }
-            </tr>
+        </tr>
         }
         <tr>
             @foreach (DataColumn column in Model.Columns)
             {
-                <td>
-                    <input type="text" name="@column.ColumnName" />
-                </td>
+            <td>
+                <input type="text" name="@column.ColumnName" /> <!-- Create input fields for each column -->
+            </td>
             }
         </tr>
     </tbody>
 </table>
 
-<button id="addLineButton">Add Line</button>
+<button id="addLineButton">Add Line</button> <!-- Button to add a new row to the table -->
