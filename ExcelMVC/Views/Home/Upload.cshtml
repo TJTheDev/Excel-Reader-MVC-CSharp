@@ -1,11 +1,6 @@
 ﻿@model System.Data.DataTable
 @using System.Data
 
-<form asp-controller="Upload" asp-action="Upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" value="Upload" />
-</form>
-
 @if (Model != null && Model.Rows.Count > 0)
 {
     <table>

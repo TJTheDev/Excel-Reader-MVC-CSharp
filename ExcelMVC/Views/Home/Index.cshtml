@@ -61,3 +61,11 @@
         }
     </script>
 }
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <br />
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
