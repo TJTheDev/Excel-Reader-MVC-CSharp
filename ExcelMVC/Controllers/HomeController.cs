@@ -30,15 +30,25 @@ namespace ExcelMVC.Controllers
             // Check if a file was uploaded
             if (file != null && file.Length > 0)
             {
+
                 // Combine the file path with the uploads folder path
                 var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", file.FileName);
 
-                // Save the uploaded file to disk
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                try
                 {
-                    file.CopyTo(stream);
-                }
 
+                    // Save the uploaded file to disk
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    // Handle the UnauthorizedAccessException
+                    Console.WriteLine("Access to the path is denied: " + ex.Message);
+                    // Displays a user-friendly error message when the file path is denied, etc.
+                }
                 try
                 {
                     // Read the Excel file into a DataTable

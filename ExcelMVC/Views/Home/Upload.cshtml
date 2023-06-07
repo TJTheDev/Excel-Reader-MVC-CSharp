@@ -1,95 +1,74 @@
 ﻿@model System.Data.DataTable
 @using System.Data
 
+<h1>Excel Viewer</h1>
 
-@if (Model != null && Model.Rows.Count > 0)
-{
-<table>
-    <thead>
-        <tr>
-            <!-- Iterate through each column in the DataTable and create a table header -->
-            @foreach (DataColumn column in Model.Columns)
-                {
-            <th>@column.ColumnName</th>
-  <!-- Display the column names in the table header -->
-                }
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Iterate through each row in the DataTable and create a table row -->
-        @foreach (DataRow row in Model.Rows)
-            {
-        <tr>
-            <!-- Iterate through each cell in the row and create a table cell -->
-            @foreach (var item in row.ItemArray)
+<div class="table-container">
+    @if (Model != null && Model.Rows.Count > 0)
+    {
+        <p>The table for your Excel document is below.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    @foreach (DataColumn column in Model.Columns)
                     {
-            <td>@item</td>
-  <!-- Display the cell values in the table body -->
+                        <th>@column.ColumnName</th> <!-- Display the column names in the table header -->
                     }
-        </tr>
-            }
-    </tbody>
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in Model.Rows)
+                {
+                    <tr>
+                        @foreach (var item in row.ItemArray)
+                        {
+                            <td>@item.ToString()</td> <!-- Display the cell values in the table body -->
+                        }
+                    </tr>
+                }
+                <tr id="newRowTemplate" style="display: none;">
+                    @foreach (DataColumn column in Model.Columns)
+                    {
+                        <td>
+                            <input type="text" name="@column.ColumnName" /> <!-- Create input fields for each column -->
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
 
- <!-- Add Line and Remove Line buttons -->
-<button type="button" onclick="addLine()">Add Line</button>
-<button type="button" onclick="removeLine()">Remove Line</button>
-}
+        <div class="table-buttons">
+            <button type="button" onclick="addLine()">Add Line</button>
+            <button type="button" onclick="removeLine()">Remove Line</button>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <script>
         function addLine() {
-            var newRow = document.createElement("tr"); // Create a new row element
-            var table = document.querySelector("table tbody"); // Get the table body element
+            var newRow = document.getElementById("newRowTemplate").cloneNode(true);
+            newRow.removeAttribute("id");
+            newRow.style.display = "table-row";
 
-            // Modify the below code to add the desired number of columns
-            for (var i = 0; i < 20; i++) {
-                var newCell = document.createElement("td"); // Create a new cell element
-                newCell.textContent = "New Value"; // Set the cell content
-                newRow.appendChild(newCell); // Append the cell to the new row
+            var tableBody = document.querySelector("table tbody");
+            tableBody.appendChild(newRow);
+
+            // Clear the input fields in the new row
+            var inputFields = newRow.getElementsByTagName("input");
+            for (var i = 0; i < inputFields.length; i++) {
+                inputFields[i].value = "";
             }
-
-            table.appendChild(newRow); // Append the new row to the table body
         }
 
         function removeLine() {
-            var table = document.querySelector("table tbody"); // Get the table body element
-            var rows = table.querySelectorAll("tr"); // Get all the rows in the table
+            var tableBody = document.querySelector("table tbody");
+            var rows = tableBody.querySelectorAll("tr");
 
             if (rows.length > 0) {
-                table.removeChild(rows[rows.length - 1]); // Remove the last row from the table
+                tableBody.removeChild(rows[rows.length - 1]);
             }
         }
     </script>
 }
-<table class="table">
-    <thead>
-        <tr>
-            @foreach (DataColumn column in Model.Columns)
-            {
-            <th>@column.ColumnName</th>
- <!-- Display the column names in the table header -->
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (DataRow row in Model.Rows)
-        {
-        <tr>
-            @foreach (var item in row.ItemArray)
-                {
-            <td>@item.ToString()</td>
- <!-- Display the cell values in the table body -->
-                }
-        </tr>
-        }
-        <tr>
-            @foreach (DataColumn column in Model.Columns)
-            {
-            <td>
-                <input type="text" name="@column.ColumnName" /> <!-- Create input fields for each column -->
-            </td>
-            }
-        </tr>
-    </tbody>
-</table>

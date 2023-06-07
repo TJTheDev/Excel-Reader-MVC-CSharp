@@ -1,18 +1,137 @@
+/* Adjusts the font size for the entire document */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
+/* Adjusts the font size for screens larger than 768px */
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
+/* Sets the position and minimum height of the HTML element */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
+/* Adds margin at the bottom of the body to prevent content overlap with the footer */
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    padding-top: 60px;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Styles the navbar brand with bold font weight */
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Limits the container width to 800px */
+.container {
+    max-width: 800px;
+}
+
+/* Styles the footer with padding, text alignment, and background color */
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+
+/* Styles for Table */
+
+/* Styles the container for the table with width, margin, background color, border radius, padding, and box shadow */
+.table-container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles the table with width and border-collapse */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Styles the table headers and cells with padding, text alignment, and bottom border */
+.table-container th,
+.table-container td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styles the table headers with background color and bold font weight */
+.table-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Styles the buttons container with text alignment and top margin */
+.table-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Styles the buttons with padding, background color, color, border, and cursor */
+.table-buttons button {
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Styles for Upload Form */
+
+/* Styles the upload form container with flexbox, justify content, and bottom margin */
+.upload-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+    /* Styles the file input */
+    .upload-form input[type="file"] {
+        padding: 10px;
+    }
+
+    /* Styles the submit button */
+    .upload-form input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+/* Additional Styles */
+
+/* Styles the heading with center alignment and color */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Styles the paragraph with center alignment, color, and removes top margin */
+p {
+    text-align: center;
+    color: #666;
+    margin-top: 0;
+}
+
+/* Styles the alert message with padding, background color, color, and bottom margin */
+.alert {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 20px;
 }

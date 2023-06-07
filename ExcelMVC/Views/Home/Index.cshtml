@@ -1,42 +1,48 @@
 ﻿@model DataTable
 @using System.Data
 
-<h2>Uploaded Excel Spreadsheet</h2>
+<div>
 
+<h1>Excel Viewer</h1>
+
+<p>Upload an Excel document to view it online</p>
+
+</div>
 
 <!-- Displays the File and Upload buttons -->
-<form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data">
+<form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data" class="upload-form">
     <input type="file" name="file" />
     <input type="submit" value="Upload" />
 </form>
 
 @if (Model != null && Model.Rows.Count > 0)
 {
-<table>
-    <thead>
-        @foreach (DataColumn column in Model.Columns)
-            {
-    <th>@column.ColumnName</th>
- <!-- Display the column names in the table header -->
-            }
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn column in Model.Columns)
+                {
+                    <th>@column.ColumnName</th> <!-- Display the column names in the table header -->
+                }
+            </tr>
         </thead>
         <tbody>
             @foreach (DataRow row in Model.Rows)
             {
-            <tr>
-                @foreach (var item in row.ItemArray)
+                <tr>
+                    @foreach (var item in row.ItemArray)
                     {
-                <td>@item</td>
- <!-- Display the cell values in the table body -->
+                        <td>@item</td> <!-- Display the cell values in the table body -->
                     }
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
 
-    <button type="button" onclick="addLine()">Add Line</button>
- <!-- Button to add a new row to the table -->
-    <button type="button" onclick="removeLine()">Remove Line</button>  <!-- Button to remove the last row from the table -->
+    <div class="table-buttons">
+        <button type="button" onclick="addLine()">Add Line</button>
+        <button type="button" onclick="removeLine()">Remove Line</button>
+    </div>
 }
 
 @section Scripts {
@@ -66,11 +72,10 @@
     </script>
 }
 
-<!-- Displays an error message if the wrong file type is uploaded -->
+<!-- Displays an error message if the wrong file type is uploaded or file access/path is denied -->
 @if (ViewBag.ErrorMessage != null)
 {
-<br />
-<div class="alert alert-danger">
-    @ViewBag.ErrorMessage
-</div>
+    <div class="alert">
+        @ViewBag.ErrorMessage
+    </div>
 }
