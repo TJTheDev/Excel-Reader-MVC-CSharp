@@ -6,29 +6,34 @@
 {
 <table>
     <thead>
-        @foreach (DataColumn column in Model.Columns)
-            {
-    <th>@column.ColumnName</th>
+        <tr>
+            <!-- Iterate through each column in the DataTable and create a table header -->
+            @foreach (DataColumn column in Model.Columns)
+                {
+            <th>@column.ColumnName</th>
   <!-- Display the column names in the table header -->
-            }
-        </thead>
-        <tbody>
-            @foreach (DataRow row in Model.Rows)
+                }
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Iterate through each row in the DataTable and create a table row -->
+        @foreach (DataRow row in Model.Rows)
             {
-            <tr>
-                @foreach (var item in row.ItemArray)
+        <tr>
+            <!-- Iterate through each cell in the row and create a table cell -->
+            @foreach (var item in row.ItemArray)
                     {
-                <td>@item</td>
+            <td>@item</td>
   <!-- Display the cell values in the table body -->
                     }
-            </tr>
+        </tr>
             }
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <button type="button" onclick="addLine()">Add Line</button>
-  <!-- Button to add a new row to the table -->
-    <button type="button" onclick="removeLine()">Remove Line</button>  <!-- Button to remove the last row from the table -->
+ <!-- Add Line and Remove Line buttons -->
+<button type="button" onclick="addLine()">Add Line</button>
+<button type="button" onclick="removeLine()">Remove Line</button>
 }
 
 @section Scripts {
@@ -57,14 +62,13 @@
         }
     </script>
 }
-
 <table class="table">
     <thead>
         <tr>
             @foreach (DataColumn column in Model.Columns)
             {
             <th>@column.ColumnName</th>
-  <!-- Display the column names in the table header -->
+ <!-- Display the column names in the table header -->
             }
         </tr>
     </thead>
@@ -75,7 +79,7 @@
             @foreach (var item in row.ItemArray)
                 {
             <td>@item.ToString()</td>
-  <!-- Display the cell values in the table body -->
+ <!-- Display the cell values in the table body -->
                 }
         </tr>
         }
@@ -89,5 +93,3 @@
         </tr>
     </tbody>
 </table>
-
-<button id="addLineButton">Add Line</button> <!-- Button to add a new row to the table -->
