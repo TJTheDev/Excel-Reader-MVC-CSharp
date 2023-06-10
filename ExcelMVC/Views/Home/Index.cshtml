@@ -2,75 +2,18 @@
 @using System.Data
 
 <div>
-
-<h1>Excel Viewer</h1>
-
-<p>Upload an Excel document to view it online</p>
-
+    <h1>Excel Viewer</h1>
+    <p>Upload an Excel document to view and change it from your browser.</p>
 </div>
 
 <!-- Displays the File and Upload buttons -->
 <form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data" class="upload-form">
-    <input type="file" name="file" />
-    <input type="submit" value="Upload" />
+    <label for="file" class="file-label">
+        <span class="file-text">No file chosen</span>
+        <input type="file" id="file" name="file" class="file-input" onchange="updateFileText(this)" />
+    </label>
+    <input type="submit" value="Upload" class="upload-button" />
 </form>
-
-@if (Model != null && Model.Rows.Count > 0)
-{
-    <table>
-        <thead>
-            <tr>
-                @foreach (DataColumn column in Model.Columns)
-                {
-                    <th>@column.ColumnName</th> <!-- Display the column names in the table header -->
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (DataRow row in Model.Rows)
-            {
-                <tr>
-                    @foreach (var item in row.ItemArray)
-                    {
-                        <td>@item</td> <!-- Display the cell values in the table body -->
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <div class="table-buttons">
-        <button type="button" onclick="addLine()">Add Line</button>
-        <button type="button" onclick="removeLine()">Remove Line</button>
-    </div>
-}
-
-@section Scripts {
-    <script>
-        function addLine() {
-            var newRow = document.createElement("tr"); // Create a new row element
-            var table = document.querySelector("table tbody"); // Get the table body element
-
-            // Modify the below code to add the desired number of columns
-            for (var i = 0; i < 5; i++) {
-                var newCell = document.createElement("td"); // Create a new cell element
-                newCell.textContent = "New Value"; // Set the cell content
-                newRow.appendChild(newCell); // Append the cell to the new row
-            }
-
-            table.appendChild(newRow); // Append the new row to the table body
-        }
-
-        function removeLine() {
-            var table = document.querySelector("table tbody"); // Get the table body element
-            var rows = table.querySelectorAll("tr"); // Get all the rows in the table
-
-            if (rows.length > 0) {
-                table.removeChild(rows[rows.length - 1]); // Remove the last row from the table
-            }
-        }
-    </script>
-}
 
 <!-- Displays an error message if the wrong file type is uploaded or file access/path is denied -->
 @if (ViewBag.ErrorMessage != null)
@@ -79,3 +22,13 @@
         @ViewBag.ErrorMessage
     </div>
 }
+
+<div class="description">
+    <h3>Description</h3>
+    <div class="box-container">
+        <p>The Excel Viewer is an online tool that allows you to upload and view Excel documents right in your browser.</p>
+        <p>Simply choose an Excel file, upload it, and the tool will display the contents of the spreadsheet in a table format. You can edit the cell values, add or remove rows, and even export the modified data back to Excel.</p>
+        <p>With the Excel Viewer, you can easily review and make changes to your Excel documents without the need for specialized software. It's perfect for quickly viewing data, making updates, and collaborating with others.</p>
+        <p>Give it a try by uploading your Excel file and start exploring your data in a user-friendly interface. Enjoy the convenience and simplicity of the Excel Viewer!</p>
+    </div>
+</div>

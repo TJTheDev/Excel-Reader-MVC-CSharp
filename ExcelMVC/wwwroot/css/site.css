@@ -1,3 +1,79 @@
+.slide-left {
+    -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-left {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+    }
+}
+
+/* Custom CSS */
+.logo-container.animated.slideInLeft {
+    animation-duration: 1s;
+    animation-name: slideInLeft;
+}
+
+.navbar-brand.animated.slideInLeft {
+    animation-duration: 1s;
+    animation-name: slideInLeft;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.slide-right {
+    -webkit-animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-right {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+    }
+}
+
+.logo-container {
+    margin-right: 10px; /* Adjust the margin as per your preference */
+}
+
+.logo {
+    width: 30px; /* Adjust the width to your desired size */
+    height: auto; /* Automatically adjust the height while maintaining the aspect ratio */
+}
+
 /* Adjusts the font size for the entire document */
 html {
     font-size: 14px;
@@ -19,7 +95,71 @@ html {
 /* Adds margin at the bottom of the body to prevent content overlap with the footer */
 body {
     margin-bottom: 60px;
-    padding-top: 60px;
+    padding-bottom: 60px; /* Add padding to the bottom of the body */
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.description {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.description h3 {
+    margin: 40px;
+    margin-bottom: -20px; /* Adjust the margin-bottom value as desired */
+}
+
+.box-container p {
+    /* Existing properties */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-container p {
+    /* ...existing styles... */
+    animation: scale-up-ver-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-up-ver-center {
+    0% {
+        transform: scaleY(0.4);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+/* Add more nth-child selectors for additional boxes */
+
+.box-container p {
+    flex: 0 0 calc(40% - 20px);
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Center the text */
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Adds padding to the top of the body */
+body {
+    padding-top: 85px; /* Add desired padding value */
+    margin-bottom: 60px;
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
 }
@@ -41,38 +181,50 @@ body {
     background-color: #f8f9fa;
 }
 
+/* Center the table */
+.parent-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 /* Styles for Table */
 
 /* Styles the container for the table with width, margin, background color, border radius, padding, and box shadow */
 .table-container {
-    width: 80%;
     margin: 0 auto;
-    background-color: #fff;
     border-radius: 4px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* Remove the box shadow */
 }
 
-/* Styles the table with width and border-collapse */
-.table-container table {
-    width: 100%;
-    border-collapse: collapse;
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-/* Styles the table headers and cells with padding, text alignment, and bottom border */
-.table-container th,
-.table-container td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+    /* Styles the table with width: auto and overflow-x: auto to enable horizontal scrolling */
+    .table-container table {
+        width: auto;
+        overflow-x: auto;
+    }
 
-/* Styles the table headers with background color and bold font weight */
-.table-container th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
+    /* Styles the table headers and cells with padding, text alignment, and bottom border */
+    .table-container th,
+    .table-container td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Styles the table headers with background color and bold font weight */
+    .table-container th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
 
 /* Styles the buttons container with text alignment and top margin */
 .table-buttons {
@@ -80,15 +232,15 @@ body {
     margin-top: 20px;
 }
 
-/* Styles the buttons with padding, background color, color, border, and cursor */
-.table-buttons button {
-    padding: 10px 20px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-}
+    /* Styles the buttons with padding, background color, color, border, and cursor */
+    .table-buttons button {
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px;
+    }
 
 /* Styles for Upload Form */
 
@@ -134,4 +286,29 @@ p {
     background-color: #f44336;
     color: white;
     margin-bottom: 20px;
+}
+
+/* Styles the file input label */
+.file-label {
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Styles the file input */
+.file-input {
+    display: none;
+}
+
+/* Styles the upload button */
+.upload-button {
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
 }

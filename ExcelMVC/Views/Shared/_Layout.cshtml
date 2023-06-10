@@ -3,48 +3,76 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ExcelMVC</title>
+    <title>@ViewData["Title"]Spreadsheet Sorcery</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExcelMVC.styles.css" asp-append-version="true" />
+
+    <!-- Navbar Animations CSS -->
+    <link rel="stylesheet" href="~/navbar-animations.css" asp-append-version="true" />
 
 </head>
 <body>
     <header>
+        <!-- Navigation bar -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExcelSheet Uploader</a>
+                <!-- Logo container -->
+                <div class="logo-container animated slideInLeft">
+                    <img src="/src/img/ExcelLogo.png" alt="Excel Logo" class="logo">
+                </div>
+                <!-- Navbar brand (text) -->
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Excel Viewer</a>
+                <!-- Navbar toggler button (for small screens) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Navbar collapse -->
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @*<li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <!-- Add your navigation items here if needed -->
+                    </ul>
+                    <!-- Add your links to the right side with animation -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/src/files/ResumeTToney6-9-23.pdf" target="_blank" rel="noopener noreferrer" style="padding: 0.5rem;">Resume</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                            <a class="nav-link" href="https://www.linkedin.com/in/tarrylon/" target="_blank" rel="noopener noreferrer" style="padding: 0.5rem;">Linkedin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/TJTheDev" target="_blank" rel="noopener noreferrer" style="padding: 0.5rem;">GitHib</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
+        <!-- Main content area -->
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Footer -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Tarrylon Toney Excel Sheet Uploader
+            &copy; 2023 - Tarrylon Toney Excel Viewer
         </div>
     </footer>
+
+    <!-- JavaScript dependencies -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Render additional scripts if required -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

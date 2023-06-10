@@ -1,10 +1,11 @@
 ﻿using ExcelMVC.Models;
-using System.Data;
-using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using System;
+using System.Data;
+using System.IO;
 
 namespace ExcelMVC.Controllers
 {
@@ -30,13 +31,11 @@ namespace ExcelMVC.Controllers
             // Check if a file was uploaded
             if (file != null && file.Length > 0)
             {
-
                 // Combine the file path with the uploads folder path
                 var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", file.FileName);
 
                 try
                 {
-
                     // Save the uploaded file to disk
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
@@ -49,6 +48,7 @@ namespace ExcelMVC.Controllers
                     Console.WriteLine("Access to the path is denied: " + ex.Message);
                     // Displays a user-friendly error message when the file path is denied, etc.
                 }
+
                 try
                 {
                     // Read the Excel file into a DataTable
@@ -105,5 +105,40 @@ namespace ExcelMVC.Controllers
                 throw new ApplicationException("Error occurred while reading Excel file: " + ex.Message);
             }
         }
+
+        [HttpPost]
+        public IActionResult ExportToExcel([FromBody] List<List<string>> data)
+        {
+            if (data != null && data.Count > 0)
+            {
+                using (var package = new ExcelPackage())
+                {
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                    var workbook = package.Workbook;
+                    var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                    // Write the data to the worksheet
+                    for (int row = 0; row < data.Count; row++)
+                    {
+                        for (int col = 0; col < data[row].Count; col++)
+                        {
+                            worksheet.Cells[row + 1, col + 1].Value = data[row][col];
+                        }
+                    }
+
+                    // Generate the Excel file bytes
+                    var fileBytes = package.GetAsByteArray();
+
+                    // Set the content type and file name for the response
+                    var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    var fileName = "ExcelData.xlsx";
+
+                    // Return the Excel file as a download response
+                    return File(fileBytes, contentType, fileName);
+                }
+            }
+
+            return BadRequest("No data provided for export.");
+        }
     }
-}
+ }
