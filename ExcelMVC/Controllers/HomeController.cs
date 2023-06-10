@@ -28,6 +28,12 @@ namespace ExcelMVC.Controllers
         [HttpPost]
         public IActionResult Upload(IFormFile file)
         {
+            var uploadsFolderPath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolderPath))
+            {
+                Directory.CreateDirectory(uploadsFolderPath);
+            }
+
             // Check if a file was uploaded
             if (file != null && file.Length > 0)
             {
