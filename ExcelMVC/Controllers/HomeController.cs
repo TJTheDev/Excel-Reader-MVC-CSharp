@@ -112,6 +112,8 @@ namespace ExcelMVC.Controllers
             }
         }
 
+
+        // Hook for exporting to Excel. I struggled to do this in JavaScript and I'm not sure why I didn't think to just route it back to the OfficeOpenXml package. Packages are God like.
         [HttpPost]
         public IActionResult ExportToExcel([FromBody] List<List<string>> data)
         {

@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\src\img\ExcelLogo.png" />
   </ItemGroup>
 
